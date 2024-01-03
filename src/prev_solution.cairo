@@ -5,19 +5,25 @@ trait ICounter<TContractState> {
     fn get_counter(self: @TContractState) -> u32;
     fn increase_counter(ref self: TContractState);
 }
+
 #[starknet::contract]
 mod Counter {
     use starknet::{ContractAddress};
-    use super::ICounter;
+    use super::{ICounter};
+    use kill_switch::kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 
     #[storage]
     struct Storage {
         counter: u32,
+        kill_switch: IKillSwitchDispatcher,
     }
 
     #[constructor]
-    fn constructor(ref self: ContractState, initial_counter: u32) {
+    fn constructor(
+        ref self: ContractState, initial_counter: u32, kill_switch_address: ContractAddress
+    ) {
         self.counter.write(initial_counter);
+        self.kill_switch.write(IKillSwitchDispatcher { contract_address: kill_switch_address });
     }
 
     #[abi(embed_v0)]
