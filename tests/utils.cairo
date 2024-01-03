@@ -5,8 +5,12 @@ mod Errors {
     const NOT_EQUAL: felt252 = 'Stored value not equal';
 }
 
-fn deploy_contract(initial_value: u32) -> ContractAddress {
+fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
+    let contract = declare('KillSwitch');
+    let constructor_args = array![kill_switch.into()];
+    let contract_address = contract.deploy(@constructor_args).unwrap();
+
     let contract = declare('Counter');
-    let constructor_args = array![initial_value.into()];
+    let constructor_args = array![initial_value.into(), contract_address.into()];
     return contract.deploy(@constructor_args).unwrap();
 }
