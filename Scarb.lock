@@ -5,8 +5,14 @@ version = 1
 name = "counter"
 version = "0.1.0"
 dependencies = [
+ "kill_switch",
  "snforge_std",
 ]
+
+[[package]]
+name = "kill_switch"
+version = "0.1.0"
+source = "git+https://github.com/robertkodra/kill-switch.git#6b1558ff40c31c794a5efdd1f6747e32f4e85e89"
 
 [[package]]
 name = "snforge_std"
