@@ -11,6 +11,14 @@ dependencies = [
 
 [[package]]
 name = "kill_switch"
+<<<<<<< HEAD
+=======
+version = "0.1.0"
+source = "git+https://github.com/starknet-edu/kill-switch.git#3250ef1a4a4606a3d8ff711a6aaefcf26172373d"
+
+[[package]]
+name = "snforge_std"
+>>>>>>> 06429e1 (adding step3)
 version = "0.1.0"
 source = "git+https://github.com/starknet-edu/kill-switch.git#496ac3024ddf93a85c9caf81dced69e0193efef8"
 
