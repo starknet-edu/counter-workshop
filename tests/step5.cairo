@@ -1,7 +1,6 @@
 use super::utils::{deploy_contract, Errors};
-use kill_switch::kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
+use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use snforge_std::{PrintTrait, declare, cheatcodes::contract_class::ContractClassTrait};
 use snforge_std::{
     spy_events, EventSpy, EventFetcher, event_name_hash, EventAssertions, Event, SpyOn
 };
