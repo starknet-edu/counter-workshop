@@ -4,9 +4,15 @@ version = "0.1.0"
 edition = "2023_01"
 
 [dependencies]
+<<<<<<< HEAD
 starknet = "2.6.3"
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.20.0" }
 kill_switch = { git = "https://github.com/starknet-edu/kill-switch.git" }
+=======
+starknet = ">=2.4.1"
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.13.1" }
+kill_switch = {git = "https://github.com/starknet-edu/kill-switch.git"}
+>>>>>>> 06429e1 (adding step3)
 
 [[target.starknet-contract]]
 sierra = true
