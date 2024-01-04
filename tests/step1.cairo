@@ -1,5 +1,5 @@
-use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
 use super::utils::{deploy_contract, Errors};
+use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
 
 #[test]
 fn check_stored_counter() {
