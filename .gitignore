@@ -1,0 +1,6 @@
+target
+.env
+node_modules
+scripts
+src/counter.cairo
+.snfoundry_cache
