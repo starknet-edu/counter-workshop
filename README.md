@@ -142,6 +142,15 @@ $ scarb test
 
 - You can access the `is_active()` function from your `kill_switch` variable. Use this to create the logic in the `increase_counter()` function.
 
+> **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
+>
+> **Goerli**
+>
+> Contract Address: `0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d`
+>
+> - [Voyager](https://goerli.voyager.online/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
+> - [Starkscan](https://testnet.starkscan.co/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
+
 ## Step 5
 
 Checkout the `step5` branch to enable the verification tests for this section.
