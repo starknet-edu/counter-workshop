@@ -10,7 +10,7 @@ trait ICounter<TContractState> {
 mod Counter {
     use starknet::{ContractAddress};
     use super::{ICounter};
-    use kill_switch::kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
+    use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 
     #[storage]
     struct Storage {
