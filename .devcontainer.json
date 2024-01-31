@@ -1,0 +1,15 @@
+{
+    "name": "dev",
+    "image": "barretodavid/starknet-dev:2.5.1",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "StarkWare.cairo1",
+			    "esbenp.prettier-vscode"
+		    ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            }
+        }
+    }
+}
