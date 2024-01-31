@@ -4,3 +4,5 @@ node_modules
 src/counter.cairo
 scripts/multi-branch-commit.sh
 .snfoundry_cache
+.DS_Store
+Scarb.lock
