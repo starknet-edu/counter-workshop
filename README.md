@@ -28,9 +28,9 @@ The next setup steps will depend on wether you prefer using Docker to manage glo
 
 4. Install Scarb 2.5.1 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
 1. Install Starknet Foundry 0.16.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
-1. Install Nodejs 20 or higher ([instructions](https://nodejs.org/en/))
 1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
 1. Run the tests to verify the project is setup correctly
+
 ```
 $ scarb test
 ```
@@ -38,9 +38,10 @@ $ scarb test
 ### Option 2: With Docker
 
 4. Make sure Docker is installed and running
-4. Install the Dev Containers extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
-4. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
-4. Open VSCode's integrated terminal and run the tests to verify the project is setup correctly
+5. Install the Dev Containers extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
+6. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
+7. Open VSCode's integrated terminal and run the tests to verify the project is setup correctly
+
 ```
 $ scarb test
 ```
@@ -59,9 +60,15 @@ $ git checkout -b step1 origin/step1
 
 In this step, you will need to do the following:
 
-1. store a variable named `counter` as `u32` type in the `Storage` struct;
-2. implement the constructor function that initializes the `counter` variable with a given input value;
-3. implement a public function named `get_counter()` which returns the value of the `counter` variable;
+1. Store a variable named `counter` as `u32` type in the `Storage` struct.
+2. Implement the constructor function that initializes the `counter` variable with a given input value.
+3. Implement a public function named `get_counter()` which returns the value of the `counter` variable.
+
+### Requirements
+
+- The `get_counter()` function must be within the contract's interface named `ICounter`.
+
+> **Note:** Any other given name to the contract's interface would break the test, be sure to have to correct name!
 
 ### Verification
 
@@ -73,9 +80,10 @@ $ scarb test
 
 ### Hints
 
-- Storage variables are the most common way to interact with your contract storage, you can read more about it in [Chapter 12.3.1 - Contract Storage](https://book.cairo-lang.org/ch99-01-03-01-contract-storage.html#contract-storage)
-- The constructor function is a special type of function that runs only once, you can read more about it in [Chapter 12.3.2 - Constructor Function](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#1-constructors)
-- The `get_counter()` function should only be able to read the state of the contract and not modify it, you can read more about it in [Chapter 12.3.2 - View functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#view-functions).
+- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 12.3.1 - Contract Storage](https://book.cairo-lang.org/ch99-01-03-01-contract-storage.html#contract-storage).
+- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 12.3.2 - Constructor Function](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#1-constructors).
+- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 12.5 Interfaces](https://book.cairo-lang.org/ch99-02-01-abis-and-interfaces.html#interface).
+- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 12.3.2 - View functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#view-functions).
 
 ## Step 2
 
@@ -101,7 +109,7 @@ $ scarb test
 
 ### Hints
 
-- The `increase_counter()` function should be able to modify the state of the contract (also called external function) and update the `counter` value in the `Storage`. You can read more about it in [Chapter 12.3.2 - External Functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#external-functions).
+- The `increase_counter()` function should be able to modify the state of the contract (also called an external function) and update the `counter` value within the `Storage`. You can read more about it in [Chapter 12.3.2 - External Functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#external-functions).
 
 ## Step 3
 
@@ -117,9 +125,10 @@ If you fell behind, the file `prev_solution.cairo` contains the solution to the 
 
 In this step, you will need to do the following:
 
-- import the KillSwitch interface in your project;
-- store a variable named `kill_switch` as type `IKillSwitchDispatcher` in the `Storage`;
-- update the constructor function, by initializing the `kill_switch` variable with a given input value
+1. Import the `KillSwitch` contract interface into your project.
+2. Store a variable named `kill_switch` as type `IKillSwitchDispatcher` in the `Storage`.
+3. Update the constructor function to receive an additional input variable with the type `ContractAddress`.
+4. Update the constructor function to initialize the `kill_switch` variable with the newly added input variable. Note that you need to use the `IKillSwitchDispatcher` which expects a `ContractAddress` as its type.
 
 > **Note:** Analyze the `KillSwitch` code to understand the interface and the contract structure from [here](https://github.com/starknet-edu/kill-switch/blob/master/src/lib.cairo). This is already added as a dependency in your `Scarb.toml` file.
 
@@ -134,7 +143,16 @@ $ scarb test
 ### Hints
 
 - You need to import `Dispatcher` and `DispatcherTrait` of the KillSwitch contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.html#contract-dispatcher).
-- In the constructor, you can update the variable `kill_switch` and pass the input value for the `IKillSwitchDispatcher` type. Note that the input value should be a `ContractAddress` type.
+- In the constructor, you can update the variable `kill_switch` with the `IKillSwitchDispatcher { contract_address: ??? }`, which expects the address of the external contract.
+
+> **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
+>
+> **Goerli**
+>
+> Contract Address: `0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d`
+>
+> - [Voyager](https://goerli.voyager.online/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
+> - [Starkscan](https://testnet.starkscan.co/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
 
 ## Step 4
 
@@ -148,12 +166,12 @@ If you fell behind, the file `prev_solution.cairo` contains the solution to the 
 
 ### Goal
 
-Implement the KillSwitch in the `increase_counter()`.
+Implement the `KillSwitch` mechanism in the `increase_counter()` by calling the `is_active()` function from the `KillSwitch` contract.
 
 ### Requirements
 
-- If the function `is_active()` from the KillSwitch contract returns `true`, then allow the `increase_counter()` to increment the value;
-- If the function `is_active()` from the KillSwitch contract returns `false`, then return without incrementing the value;
+- If the function `is_active()` from the KillSwitch contract returns `true`, then allow the `increase_counter()` to increment the value.
+- If the function `is_active()` from the KillSwitch contract returns `false`, then return without incrementing the value.
 
 ### Verification
 
@@ -167,15 +185,6 @@ $ scarb test
 
 - You can access the `is_active()` function from your `kill_switch` variable. Use this to create the logic in the `increase_counter()` function.
 
-> **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
->
-> **Goerli**
->
-> Contract Address: `0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d`
->
-> - [Voyager](https://goerli.voyager.online/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
-> - [Starkscan](https://testnet.starkscan.co/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
-
 ## Step 5
 
 Checkout the `step5` branch to enable the verification tests for this section.
@@ -188,10 +197,10 @@ If you fell behind, the file `prev_solution.cairo` contains the solution to the 
 
 ### Goal
 
-Implement an event called
+In this step, you will need to do the following:
 
-- implement an event named `CounterIncreased` which emits the current value of the `counter`
-- emit this event when the `counter` variable has been incremented
+1. Implement an event named `CounterIncreased` which emits the current value of the `counter`.
+2. Emit this event when the `counter` variable has been successfully incremented.
 
 ### Verification
 
@@ -219,7 +228,7 @@ If you fell behind, the file `prev_solution.cairo` contains the solution to the 
 
 Check that you have correctly created an account contract for Starknet by running the full test suite:
 
-```
+```bash
 $ scarb test
 ```
 
