@@ -1,7 +1,12 @@
-version: '3.8'
+version: "3.8"
 services:
   test:
-    image: barretodavid/starknet-dev:2.5.1
+    build: .
     volumes:
       - .:/app
     command: scarb test
+  deploy:
+    build: .
+    volumes:
+      - .:/app
+    command: npm run deploy

@@ -4,4 +4,3 @@ node_modules
 src/counter.cairo
 .snfoundry_cache
 .DS_Store
-Scarb.lock
