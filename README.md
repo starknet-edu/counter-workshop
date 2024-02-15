@@ -147,6 +147,13 @@ $ scarb test
 
 > **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
 >
+> **Sepolia**
+>
+> Contract Address: `0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50`
+>
+> - [Voyager](https://goerli.voyager.online/contract/0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50)
+> - [Starkscan](https://testnet.starkscan.co/contract/0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50)
+>
 > **Goerli**
 >
 > Contract Address: `0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d`
