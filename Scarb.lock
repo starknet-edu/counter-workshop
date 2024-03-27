@@ -16,5 +16,5 @@ source = "git+https://github.com/starknet-edu/kill-switch.git#496ac3024ddf93a85c
 
 [[package]]
 name = "snforge_std"
-version = "0.16.0"
-source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.16.0#f58e0ab42b6095b7d0cb841ede595aecbc9cb45d"
+version = "0.20.0"
+source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.20.0#423eecf7847469e353258321274394b9155d24eb"

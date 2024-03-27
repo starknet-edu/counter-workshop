@@ -7,11 +7,11 @@ mod Errors {
 }
 
 fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
-    let contract = declare('KillSwitch');
+    let contract = declare("KillSwitch");
     let constructor_args = array![kill_switch.into()];
     let contract_address = contract.deploy(@constructor_args).unwrap();
 
-    let contract = declare('Counter');
+    let contract = declare("Counter");
     let constructor_args = array![initial_value.into(), contract_address.into()];
     return contract.deploy(@constructor_args).unwrap();
 }

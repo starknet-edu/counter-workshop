@@ -1,9 +1,6 @@
 {
   "name": "dev",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+  "image": "barretodavid/starknet-dev:2.6.3",
   "customizations": {
     "vscode": {
       "extensions": [
