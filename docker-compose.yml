@@ -6,7 +6,7 @@ services:
       - .:/app
     command: scarb test
   deploy:
-    build: .
+    image: barretodavid/starknet-dev:2.6.3
     volumes:
       - .:/app
     command: npm run deploy
