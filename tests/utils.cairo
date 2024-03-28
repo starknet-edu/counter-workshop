@@ -6,7 +6,7 @@ mod Errors {
 }
 
 fn deploy_contract(initial_value: u32) -> ContractAddress {
-    let contract = declare('Counter');
+    let contract = declare("Counter");
     let constructor_args = array![initial_value.into()];
     return contract.deploy(@constructor_args).unwrap();
 }
