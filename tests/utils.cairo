@@ -19,7 +19,6 @@ fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
     let contract_address = contract.deploy(@constructor_args).unwrap();
 
     let contract = declare('Counter');
->>>>>>> 06429e1 (adding step3)
     let constructor_args = array![initial_value.into(), contract_address.into()];
     return contract.deploy(@constructor_args).unwrap();
 }
