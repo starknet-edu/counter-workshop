@@ -1,7 +1,7 @@
 use super::utils::{deploy_contract, Errors};
 use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
+use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 
 #[test]
 fn test_kill_switch_contract_actived() {
