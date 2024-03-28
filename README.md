@@ -26,8 +26,8 @@ The next setup steps will depend on wether you prefer using Docker to manage glo
 
 ### Option 1: Without Docker
 
-4. Install Scarb 2.5.1 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-1. Install Starknet Foundry 0.16.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+4. Install Scarb 2.6.3 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+1. Install Starknet Foundry 0.20.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
 1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
 1. Run the tests to verify the project is setup correctly
 
