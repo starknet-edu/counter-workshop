@@ -1,12 +1,12 @@
 use super::utils::{deploy_contract, Errors};
 use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
 use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
-use snforge_std::{PrintTrait, declare, cheatcodes::contract_class::ContractClassTrait};
+use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 
 
 #[test]
 fn test_kill_switch_contract_actived() {
-    let contract = declare('KillSwitch');
+    let contract = declare("KillSwitch");
     let constructor_args = array![true.into()];
     let contract_address = contract.deploy(@constructor_args).unwrap();
 
@@ -17,7 +17,7 @@ fn test_kill_switch_contract_actived() {
 
 #[test]
 fn test_kill_switch_contract_deactivated() {
-    let contract = declare('KillSwitch');
+    let contract = declare("KillSwitch");
     let constructor_args = array![false.into()];
     let contract_address = contract.deploy(@constructor_args).unwrap();
 
