@@ -7,10 +7,7 @@
         "StarkWare.cairo1",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker"
-      ],
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh"
-      }
+      ]
     }
   }
 }
