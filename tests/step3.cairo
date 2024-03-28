@@ -9,7 +9,7 @@ fn test_kill_switch_contract_actived() {
     let contract = declare("KillSwitch");
 =======
 use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
-use snforge_std::{PrintTrait, declare, cheatcodes::contract_class::ContractClassTrait};
+use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 
 
 #[test]
