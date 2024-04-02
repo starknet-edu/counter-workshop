@@ -42,7 +42,7 @@ $ scarb test
 6. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
 7. Open VSCode's integrated terminal and run the tests to verify the project is setup correctly
 
-```
+```bash
 $ scarb test
 ```
 
@@ -74,16 +74,16 @@ In this step, you will need to do the following:
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
 
-```
+```bash
 $ scarb test
 ```
 
 ### Hints
 
-- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 12.3.1 - Contract Storage](https://book.cairo-lang.org/ch99-01-03-01-contract-storage.html#contract-storage).
-- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 12.3.2 - Constructor Function](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#1-constructors).
-- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 12.5 Interfaces](https://book.cairo-lang.org/ch99-02-01-abis-and-interfaces.html#interface).
-- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 12.3.2 - View functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#view-functions).
+- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 12.3.1 - Contract Storage](https://book.cairo-lang.org/ch14-01-contract-storage.html).
+- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 12.3.2 - Constructor Function](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
+- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 12.5 Interfaces](https://book.cairo-lang.org/ch15-01-abis-and-contract-interfaces.html#interface).
+- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 12.3.2 - View functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#view-functions).
 
 ## Step 2
 
@@ -103,13 +103,13 @@ Implement a function called `increase_counter()` that can increment the current 
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
 
-```
+```bash
 $ scarb test
 ```
 
 ### Hints
 
-- The `increase_counter()` function should be able to modify the state of the contract (also called an external function) and update the `counter` value within the `Storage`. You can read more about it in [Chapter 12.3.2 - External Functions](https://book.cairo-lang.org/ch99-01-03-02-contract-functions.html#external-functions).
+- The `increase_counter()` function should be able to modify the state of the contract (also called an external function) and update the `counter` value within the `Storage`. You can read more about it in [Chapter 12.3.2 - External Functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#external-functions).
 
 ## Step 3
 
@@ -136,30 +136,23 @@ In this step, you will need to do the following:
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
 
-```
+```bash
 $ scarb test
 ```
 
 ### Hints
 
-- You need to import `Dispatcher` and `DispatcherTrait` of the KillSwitch contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.html#contract-dispatcher).
+- You need to import `Dispatcher` and `DispatcherTrait` of the KillSwitch contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.html#contract-dispatcher).
 - In the constructor, you can update the variable `kill_switch` with the `IKillSwitchDispatcher { contract_address: ??? }`, which expects the address of the external contract.
 
 > **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
 >
-> **Sepolia**
+> ## **Sepolia**
 >
-> Contract Address: `0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50`
+> Contract Address: `0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542`
 >
-> - [Voyager](https://goerli.voyager.online/contract/0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50)
-> - [Starkscan](https://testnet.starkscan.co/contract/0x07442515fa7a3eae0c6e4d40498122d57496784fbf8459e7f2b3c1a963eeaf50)
->
-> **Goerli**
->
-> Contract Address: `0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d`
->
-> - [Voyager](https://goerli.voyager.online/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
-> - [Starkscan](https://testnet.starkscan.co/contract/0x033b2c899fd8f89e3e1d5b69c4d495f1018a1dbb8c19b18795c2e16b078da34d)
+> - [Voyager](https://sepolia.voyager.online/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
+> - [Starkscan](https://sepolia.starkscan.co/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
 
 ## Step 4
 
@@ -184,7 +177,7 @@ Implement the `KillSwitch` mechanism in the `increase_counter()` by calling the 
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
 
-```
+```bash
 $ scarb test
 ```
 
@@ -213,13 +206,13 @@ In this step, you will need to do the following:
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
 
-```
+```bash
 $ scarb test
 ```
 
 ### Hints
 
-- Events are custom data structures that are emitted by a contract. More information about Events can be found in [Chapter 12.3.3 - Contract Events](https://book.cairo-lang.org/ch99-01-03-03-contract-events.html).
+- Events are custom data structures that are emitted by a contract. More information about Events can be found in [Chapter 12.3.3 - Contract Events](https://book.cairo-lang.org/ch14-03-contract-events.html).
 
 ## Step 6 (Final)
 
