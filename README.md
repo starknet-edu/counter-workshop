@@ -19,7 +19,7 @@ The next setup steps will depend on wether you prefer using Docker to manage glo
 ### Option 1: Without Docker
 
 4. Install Scarb 2.6.3 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-1. Install Starknet Foundry 0.20.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+1. Install Starknet Foundry 0.21.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
 1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
 
 ### Option 2: With Docker
@@ -32,7 +32,6 @@ The next setup steps will depend on wether you prefer using Docker to manage glo
 
 ## Step 1
 
-// TODO: add scarb scripts for testing
 Switch to the `step1` branch to enable the verification tests:
 
 ```bash
@@ -71,7 +70,7 @@ scarb build
 - Refer to the [Cheat Sheet](https://docs.swmansion.com/scarb/docs/cheatsheet.html) for essential `Scarb` commands
 - To enable Starknet Contract compilation:
   - Target starknet-contracts.
-  - Specify the Cairo version in Scarb.toml.
+  - Specify the Cairo version in `Scarb.toml`.
   - Learn more about this in the [Starknet Contract Target](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html) documentation.
 
 ## Step 2
@@ -86,6 +85,11 @@ $ git checkout -b step2 origin/step2
 
 Add `snforge` as a dependency within your `Scarb.toml` file to allow execution of tests with Starknet Foundry.
 
+### Requirements
+
+- enable `casm` contract class generation
+- define a script named `test` which allows you to run `snforge test` command
+
 ### Verification
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
@@ -99,6 +103,7 @@ scarb test
 - within your `Scarb.toml` file, declare the `snforge_std` package as your project dependency.
 - specify the version of Starknet Foundry that the project currently uses
 - Refer to the [Starknet Foundry Documention](https://foundry-rs.github.io/starknet-foundry/getting-started/first-steps.html#using-snforge-with-existing-scarb-projects) for more information.
+- Refer to the [Scarb Running Scripts Documentation](https://docs.swmansion.com/scarb/docs/reference/scripts.html#running-scripts) for more information.
 
 ## Step 3
 
@@ -132,10 +137,10 @@ $ scarb test
 
 ### Hints
 
-- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 12.3.1 - Contract Storage](https://book.cairo-lang.org/ch14-01-contract-storage.html).
-- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 12.3.2 - Constructor Function](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
-- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 12.5 Interfaces](https://book.cairo-lang.org/ch15-01-abis-and-contract-interfaces.html#interface).
-- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 12.3.2 - View functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#view-functions).
+- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 14 - Contract Storage](https://book.cairo-lang.org/ch14-01-contract-storage.html).
+- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 14 - Constructor Function](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
+- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 15 Interfaces](https://book.cairo-lang.org/ch15-01-abis-and-contract-interfaces.html#interface).
+- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 14 - View functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#view-functions).
 
 ## Step 4
 
@@ -159,7 +164,7 @@ $ scarb test
 
 ### Hints
 
-- The `increase_counter()` function should be able to modify the state of the contract (also called an external function) and update the `counter` value within the `Storage`. You can read more about it in [Chapter 12.3.2 - External Functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#external-functions).
+- The `increase_counter()` function should be able to modify the state of the contract (also called an external function) and update the `counter` value within the `Storage`. You can read more about it in [Chapter 14 - External Functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#external-functions).
 
 ## Step 5
 
@@ -186,25 +191,56 @@ $ scarb test
 
 ### Hints
 
-- Events are custom data structures that are emitted by a contract. More information about Events can be found in [Chapter 12.3.3 - Contract Events](https://book.cairo-lang.org/ch14-03-contract-events.html).
+- Events are custom data structures that are emitted by a contract. More information about Events can be found in [Chapter 14 - Contract Events](https://book.cairo-lang.org/ch14-03-contract-events.html).
 
 ---
 
 #############################################################################################
 
+> **Note:** CHECKPOINT Reached ⛳️! Switch to the `step13-js` branch to get a deployment script based on starknet.js.
+>
+> ```bash
+> $ git checkout -b step13-js origin/step13-js
+> ```
+
 #############################################################################################
 
 ---
 
-## Step 5
+## Step 6
 
-Checkout the `step5` branch to enable the verification tests for this section.
+Switch to the `step6` branch to enable the verification tests:
 
 ```bash
-$ git checkout -b step5 origin/step5
+$ git checkout -b step6 origin/step6
 ```
 
-If you fell behind, the file `prev_solution.cairo` contains the solution to the previous step.
+### Goal
+
+Add the external `KillSwitch` contract as a dependency within your project.
+
+> **Note:** The `KillSwitch` contract can be found [here](https://github.com/starknet-edu/kill-switch).
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+$ scarb test
+```
+
+### Hints
+
+- within your `Scarb.toml` file, declare the `kill_switch` package as your project dependency.
+- Refer to the [Scarb Managing Dependencies Documention](https://docs.swmansion.com/scarb/docs/guides/dependencies.html) for more information.
+
+## Step 7
+
+Switch to the `step7` branch to enable the verification tests:
+
+```bash
+$ git checkout -b step7 origin/step7
+```
 
 ### Goal
 
@@ -239,15 +275,13 @@ $ scarb test
 > - [Voyager](https://sepolia.voyager.online/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
 > - [Starkscan](https://sepolia.starkscan.co/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
 
-## Step 6
+## Step 8
 
-Checkout the `step6` branch to enable the verification tests for this section.
+Switch to the `step8` branch to enable the verification tests:
 
 ```bash
-$ git checkout -b step6 origin/step6
+$ git checkout -b step8 origin/step8
 ```
-
-If you fell behind, the file `prev_solution.cairo` contains the solution to the previous step.
 
 ### Goal
 
@@ -270,4 +304,109 @@ $ scarb test
 
 - You can access the `is_active()` function from your `kill_switch` variable. Use this to create the logic in the `increase_counter()` function.
 
-If the test suite passes, congratulations, you have created your first Counter Smart Contract on Starknet.
+## Step 9
+
+Switch to the `step9` branch to enable the verification tests:
+
+```bash
+$ git checkout -b step9 origin/step9
+```
+
+### Goal
+
+Add the external `OpenZeppelin` contracts as a dependency within your project.
+
+> **Note:** The `OpenZeppelin` contracts can be found [here](https://github.com/OpenZeppelin/cairo-contracts).
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+$ scarb test
+```
+
+### Hints
+
+- within your `Scarb.toml` file, declare the `openzeppelin` package as your project dependency.
+- Specify the OpenZeppelin `tag` version as `v0.11.0` in `Scarb.toml`.
+- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.11.0/) for more information.
+
+## Step 10
+
+Switch to the `step10` branch to enable the verification tests:
+
+```bash
+$ git checkout -b step10 origin/step10
+```
+
+### Goal
+
+Initialise the `Ownable` component from the OpenZeppelin contracts.
+
+Before working on this step, make sure to read [Chapter 16.2: Composability and Components](https://book.cairo-lang.org/ch16-02-00-composability-and-components.html) and see how Components work.
+
+### Requirements
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+$ scarb test
+```
+
+### Hints
+
+- declare the component inside your contract using the `component!()` macro.
+- add the path to the component's storage and events to the contract's `Storage` and `Event`.
+- embed the component's logic into your contract by creating an instance of the component's generic implementation with a specific `ContractState`.
+- refer to the [Using Components Inside a Contract](https://book.cairo-lang.org/ch16-02-00-composability-and-components.html#using-components-inside-a-contract) documentation to learn how to implement a component within a contract.
+
+## Step 11
+
+Switch to the `step11` branch to enable the verification tests:
+
+```bash
+$ git checkout -b step11 origin/step11
+```
+
+### Goal
+
+Modify the constructor function to utilize the `initializer()` function from the `Ownable` component for initializing the owner.
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+$ scarb test
+```
+
+### Hint
+
+- the constructor function should be able to accept a new input variable named `initial_owner`
+
+## Step 12
+
+Switch to the `step12` branch to enable the verification tests:
+
+```bash
+$ git checkout -b step12 origin/step12
+```
+
+### Goal
+
+Protect the `increase_counter()` function so that only the owner of the contract can call this.
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+$ scarb test
+```
+
+### Hints
+
+- check the `assert_only_owner()` function from the `Ownable` component
