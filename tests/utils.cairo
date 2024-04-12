@@ -7,6 +7,28 @@ mod Errors {
     const NOT_OWNER: felt252 = 'Not the owner';
 }
 
+mod Accounts {
+    use traits::TryInto;
+    use starknet::{ContractAddress};
+    use starknet::contract_address_const;
+
+    fn OWNER() -> ContractAddress {
+        contract_address_const::<'owner'>()
+    }
+
+    fn NEW_OWNER() -> ContractAddress {
+        contract_address_const::<'new_owner'>()
+    }
+
+    fn BAD_ACTOR() -> ContractAddress {
+        contract_address_const::<'bad_actor'>()
+    }
+    fn ZERO() -> ContractAddress {
+        contract_address_const::<0>()
+    }
+}
+
+
 fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
     let contract = declare("KillSwitch");
     let constructor_args = array![kill_switch.into()];
@@ -14,5 +36,5 @@ fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
 
     let contract = declare("Counter");
     let constructor_args = array![initial_value.into(), contract_address.into()];
-    return contract.deploy(@constructor_args).unwrap();
+    contract.deploy(@constructor_args).unwrap()
 }
