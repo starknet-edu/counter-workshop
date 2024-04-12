@@ -195,15 +195,11 @@ $ scarb test
 
 ---
 
-#############################################################################################
-
 > **Note:** CHECKPOINT Reached ⛳️! Switch to the `step13-js` branch to get a deployment script based on starknet.js.
 >
 > ```bash
 > $ git checkout -b step13-js origin/step13-js
 > ```
-
-#############################################################################################
 
 ---
 
