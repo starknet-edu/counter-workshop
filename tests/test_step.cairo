@@ -1,4 +1,4 @@
-use super::utils::{deploy_contract, Errors};
+use super::utils::{deploy_contract};
 use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
 
 #[test]
@@ -9,5 +9,5 @@ fn increase_counter() {
 
     dispatcher.increase_counter();
     let stored_counter = dispatcher.get_counter();
-    assert(stored_counter == initial_counter + 1, Errors::NOT_EQUAL);
+    assert!(stored_counter == initial_counter + 1, "Stored value not equal");
 }
