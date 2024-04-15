@@ -12,7 +12,7 @@ fn check_renounce_ownership_as_bad_actor() {
     start_prank(CheatTarget::One(contract_address), Accounts::BAD_ACTOR());
     dispatcher.renounce_ownership();
     let current_owner = dispatcher.owner();
-    assert(current_owner == Accounts::ZERO(), 'Owner not renounced');
+    assert!(current_owner == Accounts::ZERO(), "Owner not renounced");
     stop_prank(CheatTarget::One(contract_address));
 }
 
