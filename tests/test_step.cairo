@@ -9,7 +9,7 @@ fn check_constructor_initial_owner() {
     let contract_address = deploy_contract(initial_counter, false);
     let dispatcher = IOwnableDispatcher { contract_address };
     let current_owner = dispatcher.owner();
-    assert(Accounts::OWNER() == current_owner, Errors::NOT_OWNER);
+    assert!(Accounts::OWNER() == current_owner, "Not the owner");
 }
 
 #[test]
@@ -21,7 +21,7 @@ fn check_transfer_ownership_as_owner() {
     start_prank(CheatTarget::One(contract_address), Accounts::OWNER());
     dispatcher.transfer_ownership(Accounts::NEW_OWNER());
     let current_owner = dispatcher.owner();
-    assert(current_owner == Accounts::NEW_OWNER(), 'Owner not changed');
+    assert!(current_owner == Accounts::NEW_OWNER(), "Owner not changed");
     stop_prank(CheatTarget::One(contract_address));
 }
 
@@ -35,6 +35,6 @@ fn check_transfer_ownership_to_zero_address() {
     start_prank(CheatTarget::One(contract_address), Accounts::OWNER());
     dispatcher.transfer_ownership(Accounts::ZERO());
     let current_owner = dispatcher.owner();
-    assert(current_owner == Accounts::NEW_OWNER(), 'Owner not changed');
+    assert!(current_owner == Accounts::NEW_OWNER(), "Owner not changed");
     stop_prank(CheatTarget::One(contract_address));
 }
