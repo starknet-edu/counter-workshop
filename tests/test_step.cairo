@@ -1,4 +1,4 @@
-use super::utils::{deploy_contract, Errors};
+use super::utils::{deploy_contract};
 use openzeppelin::utils::selectors::grant_role;
 
 #[test]

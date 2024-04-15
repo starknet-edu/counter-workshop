@@ -1,12 +1,6 @@
 use starknet::{ContractAddress};
 use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 
-mod Errors {
-    const NOT_EQUAL: felt252 = 'Stored value not equal';
-    const NOT_INCREASED: felt252 = 'Value not increased';
-    const NOT_OWNER: felt252 = 'Not the owner';
-}
-
 fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
     let contract = declare("KillSwitch");
     let constructor_args = array![kill_switch.into()];
