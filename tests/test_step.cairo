@@ -21,7 +21,7 @@ fn check_transfer_ownership_as_owner() {
     start_prank(CheatTarget::One(contract_address), Accounts::OWNER());
     dispatcher.transfer_ownership(Accounts::NEW_OWNER());
     let current_owner = dispatcher.owner();
-    assert(current_owner == Accounts::NEW_OWNER(), 'Owner not changed');
+    assert!(current_owner == Accounts::NEW_OWNER(), "Owner not changed");
     stop_prank(CheatTarget::One(contract_address));
 }
 
@@ -35,7 +35,7 @@ fn check_transfer_ownership_to_zero_address() {
     start_prank(CheatTarget::One(contract_address), Accounts::OWNER());
     dispatcher.transfer_ownership(Accounts::ZERO());
     let current_owner = dispatcher.owner();
-    assert(current_owner == Accounts::NEW_OWNER(), 'Owner not changed');
+    assert!(current_owner == Accounts::NEW_OWNER(), "Owner not changed");
     stop_prank(CheatTarget::One(contract_address));
 }
 
@@ -49,7 +49,7 @@ fn check_increase_counter_as_owner() {
     dispatcher.increase_counter();
 
     let stored_counter = dispatcher.get_counter();
-    assert(stored_counter == initial_counter + 1, 'Wrong Increase Counter');
+    assert!(stored_counter == initial_counter + 1, "Wrong Increase Counter");
     stop_prank(CheatTarget::One(contract_address));
 }
 
@@ -64,7 +64,7 @@ fn check_increase_counter_as_bad_actor() {
     dispatcher.increase_counter();
 
     let stored_counter = dispatcher.get_counter();
-    assert(stored_counter == initial_counter + 1, 'Wrong Increase Counter');
+    assert!(stored_counter == initial_counter + 1, "Wrong Increase Counter");
     stop_prank(CheatTarget::One(contract_address));
 }
 
@@ -79,6 +79,6 @@ fn check_increase_counter_as_owner_with_kill_switch() {
     dispatcher.increase_counter();
 
     let stored_counter = dispatcher.get_counter();
-    assert(stored_counter == initial_counter + 1, 'Wrong Increase Counter');
+    assert!(stored_counter == initial_counter + 1, "Wrong Increase Counter");
     stop_prank(CheatTarget::One(contract_address));
 }
