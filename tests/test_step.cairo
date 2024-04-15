@@ -9,7 +9,7 @@ fn check_constructor_initial_owner() {
     let contract_address = deploy_contract(initial_counter, false);
     let dispatcher = IOwnableDispatcher { contract_address };
     let current_owner = dispatcher.owner();
-    assert(Accounts::OWNER() == current_owner, Errors::NOT_OWNER);
+    assert!(Accounts::OWNER() == current_owner, "Not the owner");
 }
 
 #[test]
