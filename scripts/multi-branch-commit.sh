@@ -4,7 +4,7 @@
 read -p "Enter commit hash to cherry-pick: " COMMIT_HASH
 
 # List of branches to cherry-pick to
-BRANCHES=("step1" "step2" "step3" "step4" "step5" "step6")
+BRANCHES=("step1" "step2" "step3" "step4" "step5" "step6" "step7" "step8" "step9" "step10" "step11" "step12" "step13-js")
 
 # Store the current branch to return to it later
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
