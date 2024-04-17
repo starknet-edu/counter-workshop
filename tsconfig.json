@@ -1,0 +1,4 @@
+{
+  "extends": "@tsconfig/node21/tsconfig.json",
+  "include": ["scripts/**/*"]
+}
