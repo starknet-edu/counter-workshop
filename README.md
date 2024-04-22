@@ -282,7 +282,7 @@ scarb test
 
 ### Hints
 
-- no hints :)
+- The task is similar as in Step 3. Refer to it for more information.
 
 ## Step 9
 
@@ -294,41 +294,11 @@ git checkout -b step9 origin/step9
 
 ### Goal
 
-In this step, you will prepare the groundworks for the `KillSwitch` mechanism. Your task is to protect the `increase_counter()` function by reverting the transaction if `KillSwitch` mechanism is enabled.
+Implement the `KillSwitch` mechanism in the `increase_counter()` by calling the `is_active()` function from the `KillSwitch` contract.
 
 ### Requirements
 
-- Create a placeholder variable named `dispatcher` in the `increase_counter()` function and set it to `true`
-- Create the condition to revert the transaction if the dispatcher value is `true`
-- Revert the transaction with the following message `Kill Switch is active`
-
-### Verification
-
-When completed, execute the test suite to verify you've met all the requirements for this section.
-
-```bash
-scarb test
-```
-
-### Hints
-
-- You can stop and revert a transaction with an error message using the `assert!()` macro. Refer to the [Cairo Book documentation](https://book.cairo-lang.org/ch10-01-how-to-write-tests.html#checking-results-with-the-assert-macro) to learn more.
-
-## Step 10
-
-Switch to the `step10` branch to enable the verification tests:
-
-```bash
-git checkout -b step10 origin/step10
-```
-
-### Goal
-
-In this step, your task is to implement the `KillSwitch` mechanism in the `increase_counter()` by calling the `is_active()` function from the `KillSwitch` contract.
-
-### Requirements
-
-- Replace the `dispatcher` placeholder value with the `KillSwitch` dispatcher
+- If the function `is_active()` from the `KillSwitch` contract returns `false`, then allow the `increase_counter()` function to increment the value; otherwise, return without incrementing.
 
 > **Note:** Analyze the `KillSwitch` code to understand the interface and the contract structure from [here](https://github.com/starknet-edu/kill-switch/blob/master/src/lib.cairo).
 
@@ -343,8 +313,8 @@ scarb test
 ### Hints
 
 - You need to import the `Dispatcher` and `DispatcherTrait` of the `KillSwitch` contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.html#contract-dispatcher).
-- In the previous step, you created a placeholder variable named `dispatcher`. Use this variable to implement the `KillSwitch` dispatcher.
 - You can access the `is_active()` function from your `KillSwitch` contract dispatcher.
+- You can use an `if` expression to implement the mechanism. Refer to the [Cairo Book](https://book.cairo-lang.org/ch02-05-control-flow.html) to learn more.
 
 > **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
 >
@@ -354,6 +324,36 @@ scarb test
 >
 > - [Voyager](https://sepolia.voyager.online/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
 > - [Starkscan](https://sepolia.starkscan.co/contract/0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542)
+
+## Step 10
+
+Switch to the `step10` branch to enable the verification tests:
+
+```bash
+git checkout -b step10 origin/step10
+```
+
+### Goal
+
+Protect the `increase_counter()` function by reverting the transaction if `KillSwitch` mechanism is enabled.
+
+### Requirements
+
+- Create the condition to revert the transaction if the dispatcher value is `true`
+- Revert the transaction with the following message `Kill Switch is active`
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+scarb test
+```
+
+### Hints
+
+- You can stop and revert a transaction with an error message using the `assert!()` macro. Refer to the [Cairo Book documentation](https://book.cairo-lang.org/ch10-01-how-to-write-tests.html#checking-results-with-the-assert-macro) to learn more.
+- You can replace the `if` expression with the `assert!()` macro instead.
 
 ## Step 11
 
