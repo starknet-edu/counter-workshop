@@ -506,10 +506,10 @@ Create a wallet that the script can use to pay for the declaration of your accou
 DEPLOYER_PRIVATE_KEY=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
 ```
 
-5. Export the public key of the funded wallet and paste it into the `.env` file using the key `DEPLOYER_PUBLIC_KEY`
+5. Export the public key of the funded wallet and paste it into the `.env` file using the key `DEPLOYER_ADDRESS`
 
 ```bash
-DEPLOYER_PUBLIC_KEY=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
+DEPLOYER_ADDRESS=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
 ```
 
 ### RPC Endpoint
@@ -528,13 +528,14 @@ Refer to [Blast](https://blastapi.io/public-api/starknet) to learn more about th
 
 Run the script that will declare and deploy your smart contract on the Starknet Testnet and ensure that you adjust the constructor inputs in your `deploy.ts` file appropriately.
 
+> **Note:** If you are deploying the smart contract from the CHECKPOINT, in the `deploy.ts` file, you will only need the `initial_counter` in the `constructor` variable. Ensure that you remove or comment out the `kill_switch_address` and `initial_onwer` variables.
+
 ```typescript
 const constructor = myCallData.compile("constructor", {
   initial_counter: 100,
   kill_switch_address:
     "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
-  initial_owner:
-    "0x02f4149ce064a65c6eb965f2b89c0afb3211203c7ab62d7d40b0f0a77e571bfa",
+  initial_owner: process.env.DEPLOYER_ADDRESS,
 });
 ```
 
