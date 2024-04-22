@@ -4,10 +4,9 @@ use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 
 #[test]
-#[should_panic(expected: ("Kill Switch is active",))]
-fn test_counter_contract_with_kill_switch_activated() {
+fn test_counter_contract_with_kill_switch_deactivated() {
     let initial_counter = 15;
-    let contract_address = deploy_contract(initial_counter, true);
+    let contract_address = deploy_contract(initial_counter, false);
     let dispatcher = ICounterDispatcher { contract_address };
 
     dispatcher.increase_counter();
@@ -16,9 +15,10 @@ fn test_counter_contract_with_kill_switch_activated() {
 }
 
 #[test]
-fn test_counter_contract_with_kill_switch_deactivated() {
+#[should_panic(expected: ("Value not increased",))]
+fn test_counter_contract_with_kill_switch_activated() {
     let initial_counter = 15;
-    let contract_address = deploy_contract(initial_counter, false);
+    let contract_address = deploy_contract(initial_counter, true);
     let dispatcher = ICounterDispatcher { contract_address };
 
     dispatcher.increase_counter();
