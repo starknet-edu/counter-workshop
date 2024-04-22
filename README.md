@@ -237,6 +237,10 @@ In this step, we will introduce an external smart contract that acts as a kill s
 ### Requirements
 
 - In your `Scarb.toml` file, declare the `kill_switch` package as your project dependency.
+- In your `Scarb.toml` file, to allow compilation of external contracts for Starknet Foundry, add the following line under the `[[target.starknet-contract]]` section.
+  ```toml
+  build-external-contracts = ["kill_switch::KillSwitch"]
+  ```
 
 ### Verification
 
@@ -249,6 +253,7 @@ scarb test
 ### Hints
 
 - Refer to the [Scarb Managing Dependencies Documention](https://docs.swmansion.com/scarb/docs/guides/dependencies.html) for more information.
+- Refer to the [Compiling External Cotnract](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts) for more information.
 
 ## Step 8
 
@@ -289,11 +294,7 @@ git checkout -b step9 origin/step9
 
 ### Goal
 
-// protect branch
-Verify if the
-Protect the
-
-In this step, you will prepare the groundworks for the `KillSwitch` mechanism. Your taks is to protect the `increase_counter()` function by reverting the transaction if `KillSwitch` mechanism is enabled.
+In this step, you will prepare the groundworks for the `KillSwitch` mechanism. Your task is to protect the `increase_counter()` function by reverting the transaction if `KillSwitch` mechanism is enabled.
 
 ### Requirements
 
@@ -323,7 +324,7 @@ git checkout -b step10 origin/step10
 
 ### Goal
 
-Implement the `KillSwitch` mechanism in the `increase_counter()` by calling the `is_active()` function from the `KillSwitch` contract.
+In this step, your task is to implement the `KillSwitch` mechanism in the `increase_counter()` by calling the `is_active()` function from the `KillSwitch` contract.
 
 ### Requirements
 
@@ -342,6 +343,7 @@ scarb test
 ### Hints
 
 - You need to import the `Dispatcher` and `DispatcherTrait` of the `KillSwitch` contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.html#contract-dispatcher).
+- In the previous step, you created a placeholder variable named `dispatcher`. Use this variable to implement the `KillSwitch` dispatcher.
 - You can access the `is_active()` function from your `KillSwitch` contract dispatcher.
 
 > **Note:** If you want to deploy the `Counter` contract, you can use the following deployed `KillSwitch` contract address.
@@ -369,7 +371,7 @@ Add the external `OpenZeppelin` contracts as a dependency within your project.
 
 ### Requirements
 
--In your `Scarb.toml` file, declare the `openzeppelin` package as your project dependency.
+- In your `Scarb.toml` file, declare the `openzeppelin` package as your project dependency.
 
 ### Verification
 
@@ -498,33 +500,47 @@ Create a wallet that the script can use to pay for the declaration of your accou
 1. Create a wallet on Starknet testnet using the [Argent X](https://www.argent.xyz/argent-x/) or [Braavos](https://braavos.app/) browser extension.
 2. Fund the wallet by using the [Faucet](https://starknet-faucet.vercel.app/) or the [Bridge](https://sepolia.starkgate.starknet.io/).
 3. Create a file in the project's root folder called `.env`
-4. Export the private key of the funded wallet and paste it in the `.env` file using the key `DEPLOYER_PRIVATE_KEY`.
+4. Export the private key of the funded wallet and paste it into the `.env` file using the key `DEPLOYER_PRIVATE_KEY`.
 
 ```bash
-DEPLOYER_PRIVATE_KEY=<YOUR_FUNDED_TESTNET_WALLET_PK>
+DEPLOYER_PRIVATE_KEY=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
+```
+
+5. Export the public key of the funded wallet and paste it into the `.env` file using the key `DEPLOYER_PUBLIC_KEY`
+
+```bash
+DEPLOYER_PUBLIC_KEY=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
 ```
 
 ### RPC Endpoint
 
-Provide an RPC URL that the script can use to interact with Starknet testnet.
+To successfully deploy the contract with the script on the Starknet Testnet, you will need to provide an RPC URL. For our workshop, we will use Blast's Public RPC Endpoint.
 
-#### Steps
-
-1. Create an account on [Blast](https://blastapi.io/public-api/starknet).
-2. TBA
+Add the following line in your `.env` file:
 
 ```bash
-DEPLOYER_PRIVATE_KEY=<YOUR_FUNDED_TESTNET_WALLET_PK>
-RPC_ENDPOINT=<YOUR_RPC_URL_FOR_STARKNET_TESTNET>
+RPC_ENDPOINT=https://starknet-sepolia.public.blastapi.io/rpc/v0_7
 ```
+
+Refer to [Blast](https://blastapi.io/public-api/starknet) to learn more about their Starknet RPC Endpoints.
 
 ### Run the Script
 
-Run the script that will declare, deploy and use your account contract to send a small amount of ETH to another wallet as a test.
+Run the script that will declare and deploy your smart contract on the Starknet Testnet and ensure that you adjust the constructor inputs in your `deploy.ts` file appropriately.
 
-#### teps
+```typescript
+const constructor = myCallData.compile("constructor", {
+  initial_counter: 100,
+  kill_switch_address:
+    "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
+  initial_owner:
+    "0x02f4149ce064a65c6eb965f2b89c0afb3211203c7ab62d7d40b0f0a77e571bfa",
+});
+```
 
-1. From project's root folder run `npm run deploy`
+#### Steps
+
+1. From the project's root folder run `npm run deploy`
 2. Follow the instructions from the terminal
 
-If the script finishes successfully your account contract is ready to be used on Starknet testnet.
+If the script finishes successfully your smart contract is ready to be used on Starknet testnet. Congratulations!
