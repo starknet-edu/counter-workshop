@@ -339,7 +339,7 @@ Protect the `increase_counter()` function by reverting the transaction if `KillS
 
 ### Requirements
 
-- Create the condition to revert the transaction if the dispatcher value is `true`
+- Create the condition to revert the transaction if the `KillSwith` contract is enabled
 - Revert the transaction with the following message `Kill Switch is active`
 
 ### Verification
