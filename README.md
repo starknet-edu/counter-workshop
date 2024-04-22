@@ -265,7 +265,7 @@ git checkout -b step8 origin/step8
 
 ### Goal
 
-Initialize the `KillSwitch` contract by storing the contract's address given as input variable in the constructor function.
+Initialize the `KillSwitch` contract by storing the contract's address given as an input variable in the constructor function.
 
 ### Requirements
 
@@ -282,7 +282,7 @@ scarb test
 
 ### Hints
 
-- The task is similar as in Step 3. Refer to it for more information.
+- The task is similar to Step 3. Refer to it for more information.
 
 ## Step 9
 
@@ -529,12 +529,13 @@ Refer to [Blast](https://blastapi.io/public-api/starknet) to learn more about th
 Run the script that will declare and deploy your smart contract on the Starknet Testnet and ensure that you adjust the constructor inputs in your `deploy.ts` file appropriately.
 
 > **Note:** If you are deploying the smart contract from the CHECKPOINT, in the `deploy.ts` file, you will only need the `initial_counter` in the `constructor` variable. Ensure that you remove or comment out the `kill_switch_address` and `initial_onwer` variables.
+>
+> Additionally, ensure that the variable names in the `deploy.ts` constructor are the same as in the `counter.cairo` constructor function.
 
 ```typescript
 const constructor = myCallData.compile("constructor", {
   initial_counter: 100,
-  kill_switch_address:
-    "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
+  address: "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
   initial_owner: process.env.DEPLOYER_ADDRESS,
 });
 ```
