@@ -1,11 +1,7 @@
-node_modules
-
 target
-src
-
 .env
+node_modules
+src/counter.cairo
 .snfoundry_cache
 .DS_Store
-
-Scarb.toml
 Scarb.lock
