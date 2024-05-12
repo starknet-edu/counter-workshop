@@ -25,31 +25,6 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 
 > **Note:** All the commands shown from this point on will assume that you are using the integrated terminal of a VSCode instance running inside the container. If you want to run the tests on a different terminal you'll need to use the command `docker compose run test`.
 
-The next setup steps will depend on wether you prefer using Docker to manage global dependencies or not.
-
-### Option 1: Without Docker
-
-4. Install Scarb 2.5.1 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-1. Install Starknet Foundry 0.16.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
-1. Install Nodejs 20 or higher ([instructions](https://nodejs.org/en/))
-1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
-1. Run the tests to verify the project is setup correctly
-```
-$ scarb test
-```
-
-### Option 2: With Docker
-
-4. Make sure Docker is installed and running
-4. Install the Dev Containers extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
-4. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
-4. Open VSCode's integrated terminal and run the tests to verify the project is setup correctly
-```
-$ scarb test
-```
-
-> **Note:** All the commands shown from this point on will assume that you are using the integrated terminal of a VSCode instance running inside the container. If you want to run the tests on a different terminal you'll need to use the command `docker compose run test`.
-
 ## Step 1
 
 Switch to the `step1` branch to enable the verification tests:
