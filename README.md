@@ -12,9 +12,10 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 
 ### Option 1: Without Docker
 
-4. Install Scarb 2.6.3 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-1. Install Starknet Foundry 0.21.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
-1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
+1. Install `asdf` ([instructions](https://asdf-vm.com/guide/getting-started.html))
+2. Install Scarb `2.6.4` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+3. Install Starknet Foundry `0.23.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+4. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
 
 ### Option 2: With Docker
 
@@ -34,7 +35,7 @@ $ git checkout -b step1 origin/step1
 
 ### Goal
 
-Initialize the project structure by using the `Scarb` package manager and enable compilation of Starknet Contracts.
+Initialize the project structure within the cloned repository by using the `Scarb` package manager and enable compilation of Starknet Contracts.
 
 ### Requirements
 
@@ -61,6 +62,7 @@ scarb build
 
 ### Hints
 
+- Check out the `scarb init` command to initialize a project. In case you want to initialze the project with a specific name, you can use the `scarb init --name PACKAGE_NAME` command.
 - Refer to the [Cheat Sheet](https://docs.swmansion.com/scarb/docs/cheatsheet.html) for essential `Scarb` commands
 - To enable Starknet Contract compilation:
   - Target `starknet-contracts`.
@@ -108,13 +110,11 @@ $ git checkout -b step3 origin/step3
 
 ### Goal
 
-Implement the `get_counter()` function which returns the value of the stored `counter` variable within the contract.
+Implement an interface for the contract which contains the `get_counter()` function. This function returns the value of the stored `counter` variable within the contract.
 
 ### Requirements
 
-- Store a variable named `counter` as `u32` type in the `Storage` struct.
-- Implement the constructor function that initializes the `counter` variable with a given input value.
-- Implement a public function named `get_counter()` which returns the value of the `counter` variable.
+- Implement an interface for a function named `get_counter()` which returns the value of the `counter` variable.
 - The `get_counter()` function must be within the contract's interface named `ICounter`.
 
 > **Note:** Any other given name to the contract's interface would break the test, be sure to have to correct name!
@@ -144,7 +144,7 @@ $ git checkout -b step4 origin/step4
 
 ### Goal
 
-Implement a function called `increase_counter()` that can increment the current value of the `counter` by `1` each time it is invoked.
+Within the same interface created in the previous step, implement a function called `increase_counter()` that can increment the current value of the `counter` by `1` each time it is invoked.
 
 ### Verification
 
@@ -170,6 +170,11 @@ $ git checkout -b step5 origin/step5
 
 Implement an event named `CounterIncreased` that emits the current value of the `counter` variable, every time the value is increased.
 
+### Requirements
+
+- Define a variant named `CounterIncreased` in the `Event` enum.
+- When defining the `counter` variable within the `CounterIncrease` struct, mark it with the `#[key]` attribute.
+
 ### Verification
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
@@ -181,13 +186,14 @@ $ scarb test
 ### Hints
 
 - Events are custom data structures that are emitted by a contract. More information about Events can be found in [Chapter 14 - Contract Events](https://book.cairo-lang.org/ch14-03-contract-events.html).
+- To emit an event, you can use the `self.emit()` function as show [here](https://book.cairo-lang.org/ch14-03-contract-events.html#emitting-events).
 
 ---
 
-> **Note:** CHECKPOINT Reached ⛳️! Switch to the `step13-js` branch to get a deployment script based on starknet.js.
+> **Note:** CHECKPOINT Reached ⛳️! Switch to the `step15-js` branch to get a deployment script based on starknet.js.
 >
 > ```bash
-> $ git checkout -b step13-js origin/step13-js
+> git checkout -b step15-js origin/step15-js
 > ```
 
 ---
