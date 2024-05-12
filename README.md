@@ -114,6 +114,36 @@ Implement an interface for the contract which contains the `get_counter()` funct
 
 ### Requirements
 
+- Store a variable named `counter` as `u32` type in the `Storage` struct.
+- Implement the constructor function that initializes the `counter` variable with a given input value.
+
+### Verification
+
+When completed, execute the test suite to verify you've met all the requirements for this section.
+
+```bash
+scarb test
+```
+
+### Hints
+
+- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 14 - Contract Storage](https://book.cairo-lang.org/ch14-01-contract-storage.html).
+- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 14 - Constructor Function](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
+
+## Step 4
+
+Switch to the `step4` branch to enable the verification tests:
+
+```bash
+git checkout -b step4 origin/step4
+```
+
+### Goal
+
+Implement an interface for the contract which contains the `get_counter()` function. This function returns the value of the stored `counter` variable within the contract.
+
+### Requirements
+
 - Implement an interface for a function named `get_counter()` which returns the value of the `counter` variable.
 - The `get_counter()` function must be within the contract's interface named `ICounter`.
 
