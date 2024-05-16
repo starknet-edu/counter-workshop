@@ -62,10 +62,10 @@ scarb build
 
 ### Hints
 
-- Check out the `scarb init` command to initialize a project. In case you want to initialze the project with a specific name, you can use the `scarb init --name PACKAGE_NAME` command.
+- Check out the `scarb init` command to initialize a project. In case you want to initialize the project with a specific name, you can use the `scarb init --name PACKAGE_NAME` command.
 - Refer to the [Cheat Sheet](https://docs.swmansion.com/scarb/docs/cheatsheet.html) for essential `Scarb` commands
 - To enable Starknet Contract compilation:
-  - Target `starknet-contracts`.
+  - Target `starknet-contract`.
   - Specify the Cairo version in the `Scarb.toml`.
   - Learn more in the [Starknet Contract Target](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html) documentation.
 
@@ -142,7 +142,7 @@ git checkout -b step4 origin/step4
 
 ### Goal
 
-Implement an interface for the contract which contains the `get_counter()` function. This function returns the value of the stored `counter` variable within the contract.
+Implement an interface for the contract which contains the `get_counter()` function. This function should return the value of the stored `counter` variable within the contract.
 
 ### Requirements
 
@@ -176,6 +176,11 @@ git checkout -b step5 origin/step5
 
 Within the same interface created in the previous step, implement a function called `increase_counter()` that can increment the current value of the `counter` by `1` each time it is invoked.
 
+### Requirements
+
+- Implement a function named `increase_counter()` which increments the `counter` value by `1`.
+- The `increase_counter()` function must be within the contract's interface named `ICounter`.
+
 ### Verification
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
@@ -204,6 +209,7 @@ Implement an event named `CounterIncreased` that emits the current value of the 
 
 - Define a variant named `CounterIncreased` in the `Event` enum.
 - When defining the `counter` variable within the `CounterIncrease` struct, mark it with the `#[key]` attribute.
+- Emit the event in the `increase_counter()` function, once the `counter` value has been incremented.
 
 ### Verification
 
@@ -244,7 +250,7 @@ In this step, we will introduce an external smart contract that acts as a kill s
 
 ### Requirements
 
-- In your `Scarb.toml` file, declare the `kill_switch` package as your project dependency.
+- In your `Scarb.toml` file, declare the `kill_switch` package as your project dependency under the `[dependencies]` section.
 - In your `Scarb.toml` file, to allow compilation of external contracts for Starknet Foundry, add the following line under the `[[target.starknet-contract]]` section.
   ```toml
   build-external-contracts = ["kill_switch::KillSwitch"]
@@ -379,7 +385,7 @@ Add the external `OpenZeppelin` contracts as a dependency within your project.
 
 ### Requirements
 
-- In your `Scarb.toml` file, declare the `openzeppelin` package as your project dependency.
+- In your `Scarb.toml` file, declare the `openzeppelin` package as your project dependency under the `[dependencies]` section.
 
 ### Verification
 
@@ -436,7 +442,7 @@ git checkout -b step13 origin/step13
 
 ### Goal
 
-Modify the constructor function to utilize the `initializer()` function within the `Ownable` component. for initializing the owner.
+Modify the constructor function to call the `initializer()` function within the `Ownable` component to initialize the owner.
 
 ### Requirements
 
@@ -452,6 +458,7 @@ scarb test
 
 ### Hint
 
+- To call the `initializer()` function you can look at what functions `self.ownable` exposes.
 - Refer to the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/src/access/ownable/ownable.cairo) to learn more about the accessible function.
 
 ## Step 14
@@ -467,6 +474,10 @@ git checkout -b step14 origin/step14
 
 Protect the `increase_counter()` function so that only the owner of the contract can call this.
 
+### Requirements
+
+- Use the `assert_only_owner()` function from the Ownable Component.
+
 ### Verification
 
 When completed, execute the test suite to verify you've met all the requirements for this section.
@@ -477,7 +488,8 @@ scarb test
 
 ### Hints
 
-- Utilize the `assert_only_owner()` function from the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/src/access/ownable/ownable.cairo).
+- To call the `assert_only_owner()` function you can look at what functions `self.ownable` exposes.
+- Check out the `assert_only_owner()` function from the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/src/access/ownable/ownable.cairo) for more information.
 
 ## Step 15
 
