@@ -15,6 +15,7 @@ async function main() {
   const accountAddress0: string = process.env.DEPLOYER_ADDRESS ?? "";
   const account0 = new Account(provider, accountAddress0, privateKey0);
   console.log("Account connected.\n");
+  console.log("account0",account0.address);
 
   // Declare & deploy contract
   let sierraCode, casmCode;
@@ -29,8 +30,7 @@ async function main() {
   const myCallData = new CallData(sierraCode.abi);
   const constructor = myCallData.compile("constructor", {
     initial_counter: 100,
-    address:
-      "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
+    initial_kill_switch:  "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
     initial_owner: process.env.DEPLOYER_ADDRESS ?? "",
   });
   const deployResponse = await account0.declareAndDeploy({
@@ -47,7 +47,7 @@ async function main() {
     provider
   );
   console.log(
-    `✅ Contract has been deploy with the address: ${myTestContract.address}`
+    `✅ Contract has been deployed with the address: ${myTestContract.address}`
   );
 }
 main()
