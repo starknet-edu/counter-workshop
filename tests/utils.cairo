@@ -1,8 +1,9 @@
-use starknet::{ContractAddress, Into, TryInto};
+use starknet::{ContractAddress};
 use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 
-fn deploy_contract(initial_value: u32) -> ContractAddress {
-    let contract = declare("Counter");
+pub fn deploy_contract(initial_value: u32) -> ContractAddress {
+    let contract = declare("counter_contract").unwrap();
     let constructor_args = array![initial_value.into()];
-    contract.deploy(@constructor_args).unwrap()
+    let (contract_adress, _) = contract.deploy(@constructor_args).unwrap();
+    contract_adress
 }
