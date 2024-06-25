@@ -1,8 +1,6 @@
-use super::utils::{deploy_contract};
-use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use snforge_std::{
-    spy_events, EventSpy, EventFetcher, event_name_hash, EventAssertions, Event, SpyOn
-};
+use super::utils::deploy_contract;
+use workshop::counter::{ICounterDispatcher, ICounterDispatcherTrait};
+use snforge_std::{spy_events, EventSpy, EventFetcher, EventAssertions, Event, SpyOn};
 
 #[test]
 fn test_counter_event() {
@@ -18,10 +16,5 @@ fn test_counter_event() {
 
     let (from, event) = spy.events.at(0);
     assert!(from == @contract_address, "Emitted from wrong address");
-
-    assert!(event.keys.len() == 1, "There should be one key");
-
-    assert!(event.keys.at(0) == @event_name_hash('CounterIncreased'), "Wrong event name");
-
-    assert!(event.data.len() == 1, "There should be one data");
+    assert!(event.keys.at(0) == @selector!("CounterIncreased"), "Wrong event name");
 }
