@@ -1,5 +1,5 @@
 use super::utils::{deploy_contract};
-use counter::counter::{ICounterDispatcher, ICounterDispatcherTrait};
+use workshop::counter::{ICounterDispatcher, ICounterDispatcherTrait};
 use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 use kill_switch::{IKillSwitchDispatcher, IKillSwitchDispatcherTrait};
 
