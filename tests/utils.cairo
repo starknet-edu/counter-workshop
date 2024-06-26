@@ -23,15 +23,15 @@ mod Accounts {
 }
 
 
-fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
-    let contract = declare("KillSwitch");
+pub fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
+    let contract = declare("KillSwitch").unwrap();
     let constructor_args = array![kill_switch.into()];
-    let contract_address = contract.deploy(@constructor_args).unwrap();
+    let (contract_address, _) = contract.deploy(@constructor_args).unwrap();
 
-    let contract = declare("Counter");
+    let contract = declare("counter_contract").unwrap();
     let constructor_args: Array<felt252> = array![
         initial_value.into(), contract_address.into(), Accounts::OWNER().into()
     ];
-    contract.deploy(@constructor_args).unwrap()
-
+    let (contract_address, _) = contract.deploy(@constructor_args).unwrap();
+    contract_address
 }
