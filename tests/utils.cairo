@@ -6,7 +6,8 @@ fn deploy_contract(initial_value: u32, kill_switch: bool) -> ContractAddress {
     let constructor_args = array![kill_switch.into()];
     let (contract_address, _) = contract.deploy(@constructor_args).unwrap();
     
-    let contract = declare("Counter").unwrap();
+    let contract = declare("counter_contract").unwrap();
     let constructor_args = array![initial_value.into(), contract_address.into()];
-    return contract.deploy(@constructor_args).unwrap();
+    let (contract_address, _) = contract.deploy(@constructor_args).unwrap(); 
+    contract_address
 }
