@@ -1,4 +1,4 @@
-use snforge_std::{ declare, ContractClassTrait, start_prank, CheatTarget };
+use snforge_std::{declare, ContractClassTrait};
 
 #[test]
 fn test_snforge() {
