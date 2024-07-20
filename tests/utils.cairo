@@ -1,3 +1,4 @@
+use core::result::ResultTrait;
 use starknet::{ContractAddress};
 use snforge_std::{declare, cheatcodes::contract_class::ContractClassTrait};
 
