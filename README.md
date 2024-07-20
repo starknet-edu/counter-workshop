@@ -13,8 +13,8 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 ### Option 1: Without Docker
 
 1. Install `asdf` ([instructions](https://asdf-vm.com/guide/getting-started.html))
-2. Install Scarb `2.6.4` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-3. Install Starknet Foundry `0.23.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+2. Install Scarb `2.6.5` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+3. Install Starknet Foundry `0.25.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
 4. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
 
 ### Option 2: With Docker
@@ -22,6 +22,31 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 4. Make sure Docker is installed and running
 5. Install the Dev Containers extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
 6. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
+
+> **Note:** All the commands shown from this point on will assume that you are using the integrated terminal of a VSCode instance running inside the container. If you want to run the tests on a different terminal you'll need to use the command `docker compose run test`.
+
+The next setup steps will depend on wether you prefer using Docker to manage global dependencies or not.
+
+### Option 1: Without Docker
+
+4. Install Scarb 2.5.1 ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+1. Install Starknet Foundry 0.16.0 ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+1. Install Nodejs 20 or higher ([instructions](https://nodejs.org/en/))
+1. Install the Cairo 1.0 extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1))
+1. Run the tests to verify the project is setup correctly
+```
+$ scarb test
+```
+
+### Option 2: With Docker
+
+4. Make sure Docker is installed and running
+4. Install the Dev Containers extension for VSCode ([marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
+4. Launch an instance of VSCode inside of the container by going to **View -> Command Palette -> Dev Containers: Rebuild and Reopen in Container**
+4. Open VSCode's integrated terminal and run the tests to verify the project is setup correctly
+```
+$ scarb test
+```
 
 > **Note:** All the commands shown from this point on will assume that you are using the integrated terminal of a VSCode instance running inside the container. If you want to run the tests on a different terminal you'll need to use the command `docker compose run test`.
 
@@ -39,11 +64,11 @@ Initialize the project structure within the cloned repository by using the `Scar
 
 ### Requirements
 
-- When initializing the project with `Scarb`, name the package as `counter`
+- When initializing the project with `Scarb`, name the package as `workshop`
 - Create a new Cairo file under the `src` directory named `counter.cairo`, and add the following starting code:
   ```rust
   #[starknet::contract]
-  mod Counter {
+  mod counter_contract {
       #[storage]
       struct Storage {}
   }
@@ -397,8 +422,8 @@ $ scarb test
 
 ### Hints
 
-- Specify the OpenZeppelin `tag` version as `v0.11.0` in `Scarb.toml`.
-- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.11.0/) for more information.
+- Specify the OpenZeppelin `tag` version as `v0.14.0` in `Scarb.toml`.
+- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.14.0/) for more information.
 
 ## Step 12
 
@@ -529,7 +554,7 @@ DEPLOYER_PRIVATE_KEY=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
 5. Export the public key of the funded wallet and paste it into the `.env` file using the key `DEPLOYER_ADDRESS`
 
 ```bash
-DEPLOYER_ADDRESS=<YOUR_FUNDED_TESTNET_WALLET_PRIVATE_KEY>
+DEPLOYER_ADDRESS=<YOUR_FUNDED_TESTNET_WALLET_PUBLIC_ADDRESS>
 ```
 
 ### RPC Endpoint
