@@ -1,3 +1,6 @@
+# Contract deployed on starkent
+## ✅ Contract has been deploy with the address: 0x4fd22715e2fbde1234f857b32768d9766b3fa8e2369445f1067b3c7d71864c2
+
 # Starknet's Counter Workshop
 
 In this workshop, you will learn how to create a simple Starknet smart contract, implement public functions, and events, access external contracts, and use OpenZeppelin's Ownable contract.
