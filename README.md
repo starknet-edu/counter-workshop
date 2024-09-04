@@ -13,8 +13,8 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 ### Option 1: Without Docker
 
 1. Install `asdf` ([instructions](https://asdf-vm.com/guide/getting-started.html))
-2. Install Scarb `2.6.5` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-3. Install Starknet Foundry `0.25.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+2. Install Scarb `2.8.0` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+3. Install Starknet Foundry `0.27.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
 4. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
 
 ### Option 2: With Docker
@@ -68,7 +68,7 @@ Initialize the project structure within the cloned repository by using the `Scar
 - Create a new Cairo file under the `src` directory named `counter.cairo`, and add the following starting code:
   ```rust
   #[starknet::contract]
-  mod counter_contract {
+  pub mod counter_contract {
       #[storage]
       struct Storage {}
   }
@@ -125,7 +125,7 @@ scarb test
 - Specify the version of Starknet Foundry that the project currently uses
 - Refer to the [Starknet Foundry Documention](https://foundry-rs.github.io/starknet-foundry/getting-started/first-steps.html#using-snforge-with-existing-scarb-projects) for more information.
 - Refer to the [Scarb Running Scripts Documentation](https://docs.swmansion.com/scarb/docs/reference/scripts.html#running-scripts) for more information.
-- `edition = "2023_01"` is a configuration that targets a general version of Cairo prelude. Refer to the [Prelude Documentation](https://book.cairo-lang.org/appendix-04-common-types-and-traits-and-cairo-prelude.html#prelude) for more information.
+- `edition = "2024_07"` is a default configuration from Scarb that targets the July 2024 version of Cairo prelude. However, in our workshop we will work with `2023_01` for simplicity. Refer to the [Prelude Documentation](https://book.cairo-lang.org/appendix-04-cairo-prelude.html#prelude) for more information.
 
 ## Step 3
 
@@ -143,6 +143,7 @@ Implement the constructor function to initialize an input number and store a var
 
 - Store a variable named `counter` as `u32` type in the `Storage` struct.
 - Implement the constructor function that initializes the `counter` variable with a given input value.
+- The input variable of the constructor function should be named `initial_value`
 
 ### Verification
 
@@ -154,8 +155,8 @@ scarb test
 
 ### Hints
 
-- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 14 - Contract Storage](https://book.cairo-lang.org/ch14-01-contract-storage.html).
-- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 14 - Constructor Function](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
+- Storage variables are the most common way to interact with your contract storage. You can read more about it in [Chapter 14 - Contract Storage](https://book.cairo-lang.org/ch14-01-00-contract-storage.html#contract-storage).
+- The constructor function is a special type of function that runs only once. You can read more about it in [Chapter 14 - Constructors](https://book.cairo-lang.org/ch14-02-contract-functions.html#1-constructors).
 
 ## Step 4
 
@@ -186,8 +187,8 @@ scarb test
 
 ### Hints
 
-- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 15 Interfaces](https://book.cairo-lang.org/ch15-01-abis-and-contract-interfaces.html#interface).
-- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 14 - View functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#view-functions).
+- To create a contract interface, you will need to define a trait with the name `ICounter` (otherwise the tests will fail) and mark the trait with the `[starknet::interface]` attribute. You can read more about it in [Chapter 13 Anatomy of a Simple Contract](https://book.cairo-lang.org/ch13-02-anatomy-of-a-simple-contract.html#the-interface-the-contracts-blueprint).
+- The `get_counter()` function should only be able to read the state of the contract and not modify it. You can read more about it in [Chapter 14 - View Functions](https://book.cairo-lang.org/ch14-02-contract-functions.html#view-functions).
 
 ## Step 5
 
@@ -233,8 +234,8 @@ Implement an event named `CounterIncreased` that emits the current value of the 
 ### Requirements
 
 - Define a variant named `CounterIncreased` in the `Event` enum.
-- When defining the `counter` variable within the `CounterIncrease` struct, mark it with the `#[key]` attribute.
-- Emit the event in the `increase_counter()` function, once the `counter` value has been incremented.
+- Defining the `value` variable within the `CounterIncrease` struct.
+- Emit the event in the `increase_counter()` function with the new value, once the `counter` value has been incremented.
 
 ### Verification
 
@@ -351,7 +352,7 @@ scarb test
 
 ### Hints
 
-- You need to import the `Dispatcher` and `DispatcherTrait` of the `KillSwitch` contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 12.5.2 - Contract Dispatcher](https://book.cairo-lang.org/ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.html#contract-dispatcher).
+- You need to import the `Dispatcher` and `DispatcherTrait` of the `KillSwitch` contract. These dispatchers are automatically created and exported by the compiler. More information about Contract Dispatcher can be found in [Chapter 15.2 - Contract Dispatcher](https://book.cairo-lang.org/ch15-02-interacting-with-another-contract.html#calling-contracts-using-the-contract-dispatcher).
 - You can access the `is_active()` function from your `KillSwitch` contract dispatcher.
 - You can use an `if` expression to implement the mechanism. Refer to the [Cairo Book](https://book.cairo-lang.org/ch02-05-control-flow.html) to learn more.
 
@@ -422,8 +423,8 @@ $ scarb test
 
 ### Hints
 
-- Specify the OpenZeppelin `tag` version as `v0.14.0` in `Scarb.toml`.
-- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.14.0/) for more information.
+- Specify the OpenZeppelin `tag` version as `v0.16.0` in `Scarb.toml`.
+- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.16.0/) for more information.
 
 ## Step 12
 
@@ -484,7 +485,7 @@ scarb test
 ### Hint
 
 - To call the `initializer()` function you can look at what functions `self.ownable` exposes.
-- Refer to the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/src/access/ownable/ownable.cairo) to learn more about the accessible function.
+- Refer to the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/packages/access/src/ownable/ownable.cairo) to learn more about the accessible function.
 
 ## Step 14
 
@@ -514,7 +515,7 @@ scarb test
 ### Hints
 
 - To call the `assert_only_owner()` function you can look at what functions `self.ownable` exposes.
-- Check out the `assert_only_owner()` function from the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/src/access/ownable/ownable.cairo) for more information.
+- Check out the `assert_only_owner()` function from the [Ownable Component](https://github.com/OpenZeppelin/cairo-contracts/blob/main/packages/access/src/ownable/ownable.cairo) for more information.
 
 ## Step 15
 
@@ -564,7 +565,7 @@ To successfully deploy the contract with the script on the Starknet Testnet, you
 Add the following line in your `.env` file:
 
 ```bash
-RPC_ENDPOINT=https://starknet-sepolia.public.blastapi.io/rpc/v0_7
+RPC_ENDPOINT=https://starknet-sepolia.public.blastapi.io/
 ```
 
 Refer to [Blast](https://blastapi.io/public-api/starknet) to learn more about their Starknet RPC Endpoints.
