@@ -1,6 +1,6 @@
 use super::utils::deploy_contract;
-use workshop::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use snforge_std::{spy_events, EventSpy, EventFetcher, EventAssertions, Event, SpyOn};
+use workshop::counter::{ICounterDispatcher, ICounterDispatcherTrait, counter_contract};
+use snforge_std::{spy_events, EventSpy, EventSpyAssertionsTrait};
 
 #[test]
 fn test_counter_event() {
@@ -8,13 +8,16 @@ fn test_counter_event() {
     let contract_address = deploy_contract(initial_counter);
     let dispatcher = ICounterDispatcher { contract_address };
 
-    let mut spy = spy_events(SpyOn::One(contract_address));
+    let mut spy = spy_events();
     dispatcher.increase_counter();
 
-    spy.fetch_events();
-    assert!(spy.events.len() == 1, "here should be one event");
+    spy.assert_emitted(@array![ 
+        (
+            contract_address,
+            counter_contract::Event::CounterIncreased(
+                counter_contract::CounterIncreased { value: 16 }
+            )
+        )
+    ]);
 
-    let (from, event) = spy.events.at(0);
-    assert!(from == @contract_address, "Emitted from wrong address");
-    assert!(event.keys.at(0) == @selector!("CounterIncreased"), "Wrong event name");
 }
