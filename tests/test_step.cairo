@@ -1,8 +1,8 @@
 use super::utils::{deploy_contract, Accounts};
 use openzeppelin::access::ownable::interface::{IOwnableDispatcher, IOwnableDispatcherTrait};
-use snforge_std::{start_cheat_caller_address, stop_cheat_caller_address, cheat_account_contract_address_global};
+use snforge_std::{start_cheat_caller_address, stop_cheat_caller_address};
 use starknet::info::get_caller_address;
-use debug::print;
+
 #[test]
 fn check_constructor_initial_owner() {
     let initial_counter = 12;
