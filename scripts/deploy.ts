@@ -20,7 +20,9 @@ async function main() {
   let sierraCode, casmCode;
 
   try {
-    ({ sierraCode, casmCode } = await getCompiledCode("counter_Counter"));
+    ({ sierraCode, casmCode } = await getCompiledCode(
+      "workshop_counter_contract"
+    ));
   } catch (error: any) {
     console.log("Failed to read contract files");
     process.exit(1);
@@ -28,7 +30,7 @@ async function main() {
 
   const myCallData = new CallData(sierraCode.abi);
   const constructor = myCallData.compile("constructor", {
-    counter: 100,
+    initial_value: 100,
     kill_switch:
       "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
     initial_owner: process.env.DEPLOYER_ADDRESS ?? "",
