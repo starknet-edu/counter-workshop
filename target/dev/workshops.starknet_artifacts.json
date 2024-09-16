@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"1lik1ctvdi3de","package_name":"workshops","contract_name":"counter_contract","module_path":"workshops::counter::counter_contract","artifacts":{"sierra":"workshops_counter_contract.contract_class.json","casm":"workshops_counter_contract.compiled_contract_class.json"}}]}

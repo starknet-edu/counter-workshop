@@ -1,7 +1,5 @@
 node_modules
 
-target
-src
 
 .env
 .snfoundry_cache
