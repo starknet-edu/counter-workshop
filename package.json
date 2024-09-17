@@ -7,8 +7,10 @@
   "dependencies": {
     "@tsconfig/node21": "21.0.3",
     "dotenv": "16.4.5",
+    "path": "^0.12.7",
+    "punycode": "^2.3.1",
     "starknet": "^7.0.0",
-    "ts-node": "10.9.2",
+    "ts-node": "^10.9.2",
     "tslib": "^2.7.0",
     "typescript": "5.5.4"
   }
