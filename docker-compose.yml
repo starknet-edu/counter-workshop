@@ -1,12 +1,12 @@
 version: "3.8"
 services:
   test:
-    image: starknetfoundation/starknet-dev:2.8.0
+    image: starknetfoundation/starknet-dev:2.8.5
     volumes:
       - .:/app
     command: scarb test
   deploy:
-    image: starknetfoundation/starknet-dev:2.8.0
+    image: starknetfoundation/starknet-dev:2.8.5
     volumes:
       - .:/app
     command: npm run deploy
