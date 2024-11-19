@@ -1,6 +1,6 @@
 use super::utils::deploy_contract;
 use workshop::counter::{ICounterDispatcher, ICounterDispatcherTrait, counter_contract};
-use snforge_std::{spy_events, EventSpy, EventSpyAssertionsTrait};
+use snforge_std::{spy_events, EventSpyAssertionsTrait};
 
 #[test]
 fn test_counter_event() {
