@@ -1,5 +1,5 @@
 use super::utils::deploy_contract;
-use snforge_std::{load, map_entry_address};
+use snforge_std::{load};
 
 #[test]
 fn check_stored_counter() {
