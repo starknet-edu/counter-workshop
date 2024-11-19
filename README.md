@@ -13,8 +13,8 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 ### Option 1: Without Docker
 
 1. Install `asdf` ([instructions](https://asdf-vm.com/guide/getting-started.html))
-2. Install Scarb `2.8.0` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
-3. Install Starknet Foundry `0.27.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
+2. Install Scarb `2.8.5` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
+3. Install Starknet Foundry `0.33.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
 4. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
 
 ### Option 2: With Docker
