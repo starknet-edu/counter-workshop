@@ -1,7 +1,7 @@
 use super::utils::{deploy_contract};
-use openzeppelin::utils::selectors::grant_role;
+use openzeppelin_access::ownable::ownable::OwnableComponent::Errors::NOT_OWNER;
 
 #[test]
 fn test_counter_contract_with_open_zeppelin() {
-    assert!(grant_role == selector!("grant_role"), "Stored value not equal");
+    assert!(NOT_OWNER == 'Caller is not the owner', "Stored value not equal");
 }
