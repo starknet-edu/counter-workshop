@@ -236,6 +236,7 @@ Implement an event named `CounterIncreased` that emits the current value of the 
 - Define a variant named `CounterIncreased` in the `Event` enum.
 - Defining the `value` variable within the `CounterIncrease` struct.
 - Emit the event in the `increase_counter()` function with the new value, once the `counter` value has been incremented.
+- Make them public to grant the test suite access.
 
 ### Verification
 
@@ -423,8 +424,8 @@ $ scarb test
 
 ### Hints
 
-- Specify the OpenZeppelin `tag` version as `v0.16.0` in `Scarb.toml`.
-- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.16.0/) for more information.
+- Specify the OpenZeppelin version as `0.19.0` in `Scarb.toml`.
+- Refer to the [OZ Contracts for Cairo Documention](https://docs.openzeppelin.com/contracts-cairo/0.19.0/) for more information.
 
 ## Step 12
 
