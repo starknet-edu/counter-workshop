@@ -15,7 +15,8 @@ Clone this repository and choose whether you prefer using Docker to manage globa
 1. Install `asdf` ([instructions](https://asdf-vm.com/guide/getting-started.html))
 2. Install Scarb `2.8.5` via `asdf` ([instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf))
 3. Install Starknet Foundry `0.33.0` via `asdf` ([instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html))
-4. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
+4. Install Rust via ([instructions](https://www.rust-lang.org/tools/install))
+5. Install the Cairo 1.0 extension for VSCode ([marketplace](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf))
 
 ### Option 2: With Docker
 
@@ -74,6 +75,10 @@ Initialize the project structure within the cloned repository by using the `Scar
   }
   ```
 - In the `lib.cairo` file remove the code and define the `counter` module
+
+  ```rust
+  pub mod counter;
+  ```
 
 > **Note:** Using any other name will disrupt upcoming steps.
 
@@ -236,7 +241,7 @@ Implement an event named `CounterIncreased` that emits the current value of the 
 - Define a variant named `CounterIncreased` in the `Event` enum.
 - Defining the `value` variable within the `CounterIncrease` struct.
 - Emit the event in the `increase_counter()` function with the new value, once the `counter` value has been incremented.
-- Make them public to grant the test suite access.
+- Make them public to grant the test suite access (this includes the `Enum`, `struct` and `value`).
 
 ### Verification
 
