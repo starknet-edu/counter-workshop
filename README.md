@@ -48,7 +48,15 @@ Initialize the project structure within the cloned repository by using the `Scar
       struct Storage {}
   }
   ```
-- In the `lib.cairo` file remove the code and define the `counter` module
+- In the `lib.cairo` file remove the code and define the `counter` module:
+  ```rust
+  mod counter;
+  ```
+
+  at some point it should be a public definition of module - just for the tests to work:
+  ```rust
+  pub mod counter;
+  ```
 
 > **Note:** Using any other name will disrupt upcoming steps.
 
